@@ -1,5 +1,7 @@
 import streamlit as st
 from transformers import pipeline
+from PIL import Image
+import numpy as np
 
 def get_key(val, dictionary): # get key from value in dictionary
     for key, value in dictionary.items():
@@ -24,8 +26,7 @@ data_es = preprocess_txt('data/cleaned_data_es.txt')
 st.set_page_config(
         page_title = "Covid-Line",
         layout = "wide",
-        initial_sidebar_state = "collapsed",
-        page_icon = "🦠"
+        initial_sidebar_state = "expanded"
 )
 # hide watermark lol
 hide_streamlit_style = """
@@ -42,15 +43,27 @@ models = {
 }
 default_language = 'English'
 user_choice_model = default_language
-user_choice_model = st.selectbox(
+col1, col2, col3 = st.sidebar.beta_columns([1,6,1])
+
+with col1:
+        st.sidebar.write("")
+
+with col2:
+        st.sidebar.image("assets/logo_cobot.png")
+
+with col3:
+        st.sidebar.write("")
+#st.sidebar.image(np.array(Image.open('assets/logo_cobot.png').resize((200, 200))))
+user_choice_model = st.sidebar.selectbox(
         'Language options',
         ('English', 'Spanish')
 )
-# data pipeline
 
 # main app
-st.title("Covid-Line Chatbot")
-st.write("#### Write any of your questions here!")
+st.title("CoBot-19")
+st.write("#### Write any of your questions about coronavirus here!")
+st.write("For the bot to get a better understanding about your question, preferably write descriptive questions using keywords")
+st.write("Use keywords such as how, when or what to get a better answer.")
 user_input = get_text()
 if user_input:
         # get answer from model as a dictionary
