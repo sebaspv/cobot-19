@@ -1,7 +1,4 @@
 import streamlit as st
-'''
-Main streamlit app
-'''
 st.title("Main App")
 st.write("Some random stuff")
 
