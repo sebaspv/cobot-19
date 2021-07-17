@@ -1,2 +1,2 @@
-# covid-chatbot-hackathon
+# Covid Chatbot
 random covid chatbot lol
